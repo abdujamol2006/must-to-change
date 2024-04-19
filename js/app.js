@@ -8,6 +8,8 @@ async function fetchData(endpoint) {
   try {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/${endpoint}`
+      /* .then((response) => response.json())
+        .then((json) => console.log(json))*/
     );
     const data = await response.json();
     return data;
