@@ -1,14 +1,39 @@
-const searchInp = document.getElementById("input");
-const submitBtn = document.getElementById("button");
-const productList = document.getElementById("productList");
-const listItem = document.getElementById("listItem");
+const postsBtn = document.getElementById("postsBtn");
+const usersBtn = document.getElementById("usersBtn");
+const photosBtn = document.getElementById("photosBtn");
+const todosBtn = document.getElementById("todosBtn");
+const outputDiv = document.getElementById("output");
 
-submitBtn.addEventListener("click", () => {
-  let text = input.value;
-  input.value = "";
-  productList.innerHTML += `<li>${text}</li>`;
+async function fetchData(endpoint) {
+  try {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/${endpoint}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Ma'lumotlarni olishda xato: ", error);
+  }
+}
+postsBtn.addEventListener("click", async () => {
+  const posts = await fetchData("posts");
+  displayData(posts);
 });
-/*let text = input.value;
-productList.addEventListener("dblclick", () => {
-  productList.textContent = "";
-});*/
+
+usersBtn.addEventListener("click", async () => {
+  const users = await fetchData("users");
+  displayData(users);
+});
+
+photosBtn.addEventListener("click", async () => {
+  const photos = await fetchData("photos");
+  displayData(photos);
+});
+todosBtn.addEventListener("click", async () => {
+  const todos = await fetchData("todos");
+  displayData(todos);
+});
+
+function displayData(data) {
+  outputDiv.innerHTML = JSON.stringify(data, null, 2);
+}
