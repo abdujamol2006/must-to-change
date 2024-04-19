@@ -10,6 +10,7 @@ html {
 body {
   background-image: url(https://www.desktopbackground.org/download/1600x1200/2015/01/18/889005_unique-images_2560x1440_h.jpg);
   display: flex;
+
   height: 100%;
   flex-direction: column;
 }
