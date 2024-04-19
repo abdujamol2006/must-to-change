@@ -4,38 +4,40 @@ const photosBtn = document.getElementById("photosBtn");
 const todosBtn = document.getElementById("todosBtn");
 const outputDiv = document.getElementById("output");
 
-async function fetchData(endpoint) {
-  try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/${endpoint}`
-      /* .then((response) => response.json())
-        .then((json) => console.log(json))*/
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Ma'lumotlarni olishda xato: ", error);
-  }
+usersBtn.addEventListener("click", () => getData("users"));
+todosBtn.addEventListener("click", () => getData("todos"));
+postsBtn.addEventListener("click", () => getData("posts"));
+photosBtn.addEventListener("click", () => getData("photos"));
+
+function createUi(data, dataType) {
+  data.forEach((item) => {
+    const li = document.createElement("li");
+    li.classList.add("list-item");
+
+    switch (dataType) {
+      case "users":
+        li.innerHTML = `<p>Name:${item.name}</p><p>Username:${item.username}</p><p>Phone:${item.phone}</p>`;
+        break;
+
+      case "todos":
+        li.innerHTML = `<p>ID:${item.id}</p><p>Title:${item.title}</p><p>Completed:${item.completed}</p>`;
+        break;
+
+      case "posts":
+        li.innerHTML = `<p>ID:${item.id}</p><p>Title:${item.title}</p><p>Desc:${item.body}</p>`;
+        break;
+
+      case "photos":
+        li.innerHTML = `<p>Name:${item.name}</p><p>Username:${item.username}</p><p>Phone:${item.phone}</p>`;
+        break;
+    }
+
+    outputDiv.appendChild(li);
+  });
 }
-postsBtn.addEventListener("click", async () => {
-  const posts = await fetchData("posts");
-  displayData(posts);
-});
-
-usersBtn.addEventListener("click", async () => {
-  const users = await fetchData("users");
-  displayData(users);
-});
-
-photosBtn.addEventListener("click", async () => {
-  const photos = await fetchData("photos");
-  displayData(photos);
-});
-todosBtn.addEventListener("click", async () => {
-  const todos = await fetchData("todos");
-  displayData(todos);
-});
-
-function displayData(data) {
-  outputDiv.innerHTML = JSON.stringify(data, null, 2);
+function getData(dataType) {
+  fetch(`https://jsonplaceholder.typicode.com/${dataType}`)
+    .then((res) => res.json())
+    .then((data) => createUi(data.slice(0, 20), dataType))
+    .catch((err) => alert("Eror"));
 }

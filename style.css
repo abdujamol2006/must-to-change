@@ -8,11 +8,16 @@ html {
   height: 100%;
 }
 body {
-  background-image: url(https://www.desktopbackground.org/download/1600x1200/2015/01/18/889005_unique-images_2560x1440_h.jpg);
+  background-image: url(https://img-fotki.yandex.ru/get/196183/342743041.202/0_6884fd_3e4a3e76_X5L.jpg);
   display: flex;
+  background-size: 1550px;
 
   height: 100%;
   flex-direction: column;
+}
+.img {
+  width: 100px;
+  height: 100px;
 }
 ul,
 ol {
@@ -20,9 +25,12 @@ ol {
 }
 .container {
   display: flex;
-
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
+}
+.btns {
+  display: flex;
   justify-content: space-around;
 }
 
