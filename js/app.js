@@ -10,6 +10,7 @@ postsBtn.addEventListener("click", () => getData("posts"));
 photosBtn.addEventListener("click", () => getData("photos"));
 
 function createUi(data, dataType) {
+  dataList.innerHTML = "";
   data.forEach((item) => {
     const li = document.createElement("li");
     li.classList.add("list-item");
